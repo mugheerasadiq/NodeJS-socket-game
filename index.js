@@ -1,19 +1,20 @@
-const https = require("https");
+const http = require("http");
 const app = require("express")();
 app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
 app.get("/monitor", (req, res) => res.sendFile(__dirname + "/monitor.html"));
 
-app.listen(9091, () => console.log("Listening on http port 9091"));
+// app.listen(9091, () => console.log("Listening on http port 9091"));
 const websocketServer = require("websocket").server;
-const httpServer = https.createServer();
+const httpServer = http.createServer(app);
 httpServer.listen(9090, () => console.log("Listening on 9090"));
 //hashmap clients
 const clients = {};
 const games = {};
 
 const wsServer = new websocketServer({
-  httpsServer: httpServer,
+  httpServer: httpServer,
 });
+
 wsServer.on("request", (request) => {
   //connect
   const connection = request.accept(null, request.origin);
