@@ -16,6 +16,7 @@ const wsServer = new websocketServer({
 });
 
 wsServer.on("request", (request) => {
+  console.log("HIT");
   //connect
   const connection = request.accept(null, request.origin);
   connection.on("open", () => console.log("opened!"));
