@@ -4,11 +4,12 @@ const app = require("express")();
 // app.listen(9091, () => console.log("Listening on http port 9091"));
 const websocketServer = require("websocket").server;
 const httpServer = http.createServer(app);
-httpServer.listen(3000, () => console.log("Listening on 3000"));
+httpServer.listen(process.env.PORT || 3000, () =>
+  console.log("Listening on 3000")
+);
 
-app.use((req, res) => res.sendFile("./index.html", { root: __dirname }));
-
-// app.get("/monitor", (req, res) => res.sendFile(__dirname + "/monitor.html"));
+app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
+app.get("/monitor", (req, res) => res.sendFile(__dirname + "/monitor.html"));
 
 //hashmap clients
 const clients = {};
