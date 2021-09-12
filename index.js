@@ -1,12 +1,14 @@
 const http = require("http");
 const app = require("express")();
-app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
-app.get("/monitor", (req, res) => res.sendFile(__dirname + "/monitor.html"));
 
 // app.listen(9091, () => console.log("Listening on http port 9091"));
 const websocketServer = require("websocket").server;
 const httpServer = http.createServer(app);
-httpServer.listen(9090, () => console.log("Listening on 9090"));
+httpServer.listen(3000, () => console.log("Listening on 9090"));
+
+app.get("/", (req, res) => res.sendFile(__dirname + "/index.html"));
+app.get("/monitor", (req, res) => res.sendFile(__dirname + "/monitor.html"));
+
 //hashmap clients
 const clients = {};
 const games = {};
